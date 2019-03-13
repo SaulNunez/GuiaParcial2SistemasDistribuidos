@@ -9,21 +9,20 @@ package guiaparcial2sistemasdistribuidos;
  *
  * @author sauln
  */
-public class Adivinador extends Thread {
+public class Adivinador extends Thread implements IAdivinador {
+    private Generador generador;
+    
+    public Adivinador(Generador generador){
+        this.generador = generador;
+    }
+    
     @Override
     public void run(){
     
     }
-    
-    public void empezarAdivinar(){
-    
-    }
-    
-    public void adivinar(){
-        
-    }
-    
-    public void seAcabaronLosIntentos(){
+
+    @Override
+    public void IntentosTerminados() {
         System.out.println("Adivinador: :(");
     }
 }
