@@ -17,9 +17,11 @@ public class GuiaParcial2SistemasDistribuidos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Random r = new Random();
-        int numeroAdivinado = r.nextInt((6 - 3) + 1) + 3;
-        System.out.println(numeroAdivinado);
+        Generador generador = new Generador();
+        generador.start();
+        
+        Adivinador adivinador = new Adivinador(generador);
+        adivinador.start();
     }
     
 }
