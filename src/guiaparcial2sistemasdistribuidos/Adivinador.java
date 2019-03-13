@@ -10,7 +10,7 @@ package guiaparcial2sistemasdistribuidos;
  * @author sauln
  */
 public class Adivinador extends Thread implements IAdivinador {
-    private Generador generador;
+    private final Generador generador;
     
     public Adivinador(Generador generador){
         this.generador = generador;
