@@ -6,6 +6,8 @@
 package guiaparcial2sistemasdistribuidos;
 
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,13 +28,33 @@ public class Adivinador extends Thread {
         // Next int saca numeros desde el cero hasta <max
         // Por eso usamos el floor para obtener numeros desde el cero hasta max y en int
         // Ademas, nuestro rango no es cero, así que sumamos min a cero
-        Generador.Pistas pistaActual = generador.intento((int)Math.floor(random.nextInt(max - min + 1)) + min);
-        while(pistaActual != Generador.Pistas.Correcto){
-        
-        }
-    }
-
-    public void IntentosTerminados() {
-        System.out.println("Adivinador: :(");
+        Generador.Pistas pistaActual;
+        int intento;
+        do {
+            intento = (int)Math.floor(random.nextInt(max - min + 1)) + min;
+            System.out.println("Adivinador: Elijo el " + Integer.toString(intento));
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Adivinador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            pistaActual = generador.intento(intento);
+            switch(pistaActual){
+                case INTENTA_MAYOR:
+                    min = intento;
+                    break;
+                case INTENTA_MENOR:
+                    max = intento;
+                    break;
+                case INTENTOS_ACABADOS:
+                    System.out.println("Adivinador: :(");
+                    break;
+                case CORRECTO:
+                    System.out.println("Adivinador: :D");
+                    break;
+            }
+            
+        } while (pistaActual != Generador.Pistas.CORRECTO 
+                && generador.todaviaMeQuedanIntentos());
     }
 }
